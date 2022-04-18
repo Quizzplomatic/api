@@ -2,7 +2,10 @@ const Question = require('../models/Question.model')
 
 module.exports.list = (req, res, next) => {
     Question.find()
-        .then(questions => res.status(200).json(questions))
+        .then(questions => {
+            res.status(200).json(questions)
+            console.log('buscar preguntas')
+        })
         .catch(next)
 }
 
@@ -19,5 +22,14 @@ module.exports.update = (req, res, next) => {
         .then(updatedQuestion => {
             res.status(200).json(updatedQuestion)
         })
+        .catch(next)
+}
+
+module.exports.delete = (req, res, next) => {
+    const { id } = req.params
+    Question.findByIdAndDelete(id)
+        .then(deletedQuestion => {
+            res.status(202).json(deletedQuestion)
+        })  
         .catch(next)
 }
