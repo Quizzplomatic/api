@@ -9,8 +9,13 @@ const cors = require('cors')
 require('./config/db.config')
 const app = express();
 
+const corsMiddleware = cors({
+    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
+    allowedHeaders: ["Content-Type", "Authorization"],
+});
+
 // Middlewares
-app.use(cors())
+app.use(corsMiddleware())
 app.use(express.json());
 app.use(logger('dev'));
 
