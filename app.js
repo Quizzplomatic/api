@@ -9,13 +9,8 @@ const cors = require('cors')
 require('./config/db.config')
 const app = express();
 
-const corsMiddleware = cors({
-    origin: process.env.CORS_ORIGIN || "http://localhost:3000",
-    allowedHeaders: ["Content-Type", "Authorization"],
-});
-
 // Middlewares
-app.use(corsMiddleware())
+app.use(cors())
 app.use(express.json());
 app.use(logger('dev'));
 
@@ -43,14 +38,16 @@ app.use((error, req, res, next) => {
     }
 
     const data = {}
-    if (data.errors = data.errors) {
-        Object.keys(error.errors).reduce((errors, key) => ({
-            ...errors,
-            [key]: error.errors[key].message || error.errors[key],
-        }), {})
-    } else {
-        undefined
-    }
+    data.message = error.message;
+    data.errors = error.errors
+        ? Object.keys(error.errors).reduce(
+            (errors, key) => ({
+              ...errors,
+              [key]: error.errors[key].message || error.errors[key],
+            }),
+            {}
+          )
+        : undefined;
     
     res.status(error.status).json(data)
 });
