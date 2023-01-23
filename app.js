@@ -9,10 +9,18 @@ const cors = require('cors')
 require('./config/db.config')
 const app = express();
 
+;
+
 // Middlewares
 app.use(express.json());
 app.use(logger('dev'));
-app.use(cors());
+
+const corsOptions ={
+    origin: 'http://localhost:3000', 
+    credentials: true,
+    optionSuccessStatus: 200
+}
+app.use(cors(corsOptions))
 
 
 // Routes
