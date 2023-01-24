@@ -9,8 +9,6 @@ const cors = require('cors')
 require('./config/db.config')
 const app = express();
 
-;
-
 // Middlewares
 app.use(express.json());
 app.use(logger('dev'));
