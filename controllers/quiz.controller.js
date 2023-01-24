@@ -4,7 +4,6 @@ module.exports.list = (req, res, next) => {
     Question.find()
         .then(questions => {
             res.status(200).json(questions)
-            console.log('buscar preguntas')
         })
         .catch(next)
 }
