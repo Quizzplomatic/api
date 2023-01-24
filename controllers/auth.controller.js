@@ -2,30 +2,6 @@ const createError = require("http-errors");
 const jwt = require('jsonwebtoken');
 const User = require("../models/User.model");
 
-module.exports.getUserById = (req, res, next) => {
-    User.findById(req.params.id)
-        .then(user => {
-            if (!user) {
-                next(createError(404, 'User not found!'));
-            } else {
-                res.status(200).json(user);
-            }
-        })
-        .catch(next);
-};
-
-module.exports.getCurrentUser = (req, res, next) => {
-    User.findById(req.currentUser)
-        .then(user => {
-            if (!user) {
-                next(createError(404, 'User not found!'))
-            } else {
-                res.status(200).json(user)
-            }
-        })
-        .catch(next);
-};
-
 module.exports.register = (req, res, next) => {
     const newUser = req.body;
 

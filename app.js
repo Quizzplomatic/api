@@ -15,7 +15,6 @@ app.use(logger('dev'));
 
 const corsOptions ={
     origin: ['https://quizplomatic.netlify.app', 'http://localhost:3000'], 
-    credentials: true,
     optionSuccessStatus: 200
 }
 app.use(cors(corsOptions))
